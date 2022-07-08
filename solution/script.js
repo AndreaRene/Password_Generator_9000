@@ -20,8 +20,8 @@ generateBtn.addEventListener("click", writePassword);
 function generatePassword() {
   var passLength = getPassLength(minLength, maxLength);
   console.log(passLength);
-  // var includeUpper = getIncludeUpper();
-  // console.log(includeUpper);
+  var includeUpper = getIncludeUpper();
+  console.log(includeUpper);
 }
 
 
@@ -29,26 +29,35 @@ function generatePassword() {
 
 // get password length
 function getPassLength(min, max) {
-
-  var lengthInput = prompt("Please choose a password length between 8 and 128 characters:");
-
-  if (lengthInput.match(/[0-9]/) && lengthInput >= min && lengthInput <= max) {
-    return lengthInput;
-  } else {
-    alert("Your input was invalid");
-    getPassLength(minLength, maxLength);
+  let i = 0;
+  while (i === 0) {
+    var lengthInput = prompt("Please choose a password length between 8 and 128 characters:");
+    if (lengthInput.match(/[0-9]/) && lengthInput >= min && lengthInput <= max) {
+      console.log(lengthInput);
+      i++;
+      return lengthInput.valueOf();
+    } else {
+      alert("Your input was invalid");
+    }
   }
 }
 
-// function getIncludeUpper() {
+// does the user want upper case
 
-//   var isUpper = prompt("Would you like to include uppercase  characters? Yes or No")
-
-//   if (isUpper.toLowerCase() === "yes" || isUpper.toLowerCase() === "y") {
-//     return true;
-//   } else if (isUpper.toLowerCase() === "no" || isUpper.toLowerCase() === "n") {
-//     return false;
-//   } else {
-//     alert("Your input was invalid");
-//   } getIncludeUpper();
-// }
+function getIncludeUpper() {
+  let i = 0;
+  while (i === 0) {
+    var isUpper = prompt("Would you like to include uppercase  characters? Yes or No");
+    if (isUpper.toLowerCase() === "yes" || isUpper.toLowerCase() === "y") {
+      console.log(isUpper);
+      i++;
+      return true;
+    } else if (isUpper.toLowerCase() === "no" || isUpper.toLowerCase() === "n") {
+      console.log(isUpper);
+      i++;
+      return false;
+    } else {
+      alert("Your input was invalid");
+    }
+  }
+}
