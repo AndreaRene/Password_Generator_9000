@@ -20,8 +20,14 @@ generateBtn.addEventListener("click", writePassword);
 function generatePassword() {
   var passLength = getPassLength(minLength, maxLength);
   console.log(passLength);
-  var includeUpper = getIncludeUpper();
+  var includeUpper = getResponse("uppercase letters?");
   console.log(includeUpper);
+  var includeLower = getResponse("lowercase letters?");
+  console.log(includeLower);
+  var includeSpecial = getResponse("special characters?");
+  console.log(includeSpecial);
+  var includeNumber = getResponse("numbers?");
+  console.log(includeNumber);
 }
 
 
@@ -32,32 +38,36 @@ function getPassLength(min, max) {
   let i = 0;
   while (i === 0) {
     var lengthInput = prompt("Please choose a password length between 8 and 128 characters:");
-    if (lengthInput.match(/[0-9]/) && lengthInput >= min && lengthInput <= max) {
+    if (lengthInput.match(/[0-9]/) && !lengthInput.match(/[.]/) && lengthInput >= min && lengthInput <= max) {
       console.log(lengthInput);
       i++;
-      return lengthInput.valueOf();
+      return lengthInput.trim();
     } else {
       alert("Your input was invalid");
     }
   }
 }
 
-// does the user want upper case
-
-function getIncludeUpper() {
+// get password requirements (upper, lower, special, number)
+function getResponse(condition) {
   let i = 0;
   while (i === 0) {
-    var isUpper = prompt("Would you like to include uppercase  characters? Yes or No");
-    if (isUpper.toLowerCase() === "yes" || isUpper.toLowerCase() === "y") {
-      console.log(isUpper);
+    var response = prompt("Would you like to include " + condition + " Yes or No");
+    if (response.toLowerCase() === "yes" || response.toLowerCase() === "y") {
+      console.log(response);
       i++;
       return true;
-    } else if (isUpper.toLowerCase() === "no" || isUpper.toLowerCase() === "n") {
-      console.log(isUpper);
+    } else if (response.toLowerCase() === "no" || response.toLowerCase() === "n") {
+      console.log(response);
       i++;
       return false;
     } else {
       alert("Your input was invalid");
     }
   }
+}
+
+// create character list for password generator based on user requirements
+function getCharList(includeUpper, includeLower, includeSpecial, includeNumber) {
+
 }
