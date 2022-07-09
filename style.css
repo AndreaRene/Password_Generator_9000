@@ -135,12 +135,19 @@ button[disabled] {
   #password {
     font-size: 1rem;
   }
-}
 
-@media (max-width: 500px) {
 
-  header {
-    font-size: .7rem;
+
+  @media (max-width: 500px) {
+
+    header {
+      font-size: .7rem;
+    }
+
+    .wrapper {
+      margin: 0;
+      height: 100%;
+    }
   }
 
   .btn {
