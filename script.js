@@ -50,11 +50,11 @@ function getPassLength(min, max) {
   while (i === 0) {
     var lengthInput = prompt("Please choose a password length between 8 and 128 characters:");
 
-    if (lengthInput.match(/[0-9]/) && !lengthInput.match(/[.]/) && lengthInput >= min && lengthInput <= max) {
+    if (!lengthInput.match(/[.]/) && lengthInput >= min && lengthInput <= max) {
       i++;
       return lengthInput.trim();
     } else {
-      alert("Your input was invalid");
+      alert("Your input was invalid.");
     }
   }
 }
@@ -72,7 +72,7 @@ function getResponse(condition) {
       i++;
       return false;
     } else {
-      alert("Your input was invalid");
+      alert("Your input was invalid.");
     }
   }
 }
