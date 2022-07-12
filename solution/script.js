@@ -6,6 +6,9 @@ var maxLength = 128;
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
+  if (password === false) {
+    return;
+  }
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
@@ -19,13 +22,28 @@ generateBtn.addEventListener("click", writePassword);
 function generatePassword() {
 
   var passLength = getPassLength(minLength, maxLength);
+  if (passLength == null) {
+    return false;
+  }
 
   let i = 0;
   while (i === 0) {
     var includeUpper = getResponse("uppercase letters?");
+    if (includeUpper == null) {
+      return false;
+    }
     var includeLower = getResponse("lowercase letters?");
+    if (includeLower == null) {
+      return false;
+    }
     var includeSpecial = getResponse("special characters?");
+    if (includeSpecial == null) {
+      return false;
+    }
     var includeNumber = getResponse("numbers?");
+    if (includeNumber == null) {
+      return false;
+    }
 
     if (includeUpper || includeLower || includeSpecial || includeNumber) {
       i++;
@@ -50,11 +68,15 @@ function getPassLength(min, max) {
   while (i === 0) {
     var lengthInput = prompt("Please choose a password length between 8 and 128 characters:");
 
-    if (!lengthInput.match(/[.]/) && lengthInput >= min && lengthInput <= max) {
-      i++;
-      return lengthInput.trim();
+    if (lengthInput != null) {
+      if (!lengthInput.match(/[.]/) && lengthInput >= min && lengthInput <= max) {
+        i++;
+        return lengthInput.trim();
+      } else {
+        alert("Your input was invalid.");
+      }
     } else {
-      alert("Your input was invalid.");
+      break;
     }
   }
 }
@@ -65,14 +87,18 @@ function getResponse(condition) {
   let i = 0;
   while (i === 0) {
     var response = prompt("Would you like to include " + condition + " Yes or No");
-    if (response.toLowerCase() === "yes" || response.toLowerCase() === "y") {
-      i++;
-      return true;
-    } else if (response.toLowerCase() === "no" || response.toLowerCase() === "n") {
-      i++;
-      return false;
+    if (response != null) {
+      if (response.toLowerCase() === "yes" || response.toLowerCase() === "y") {
+        i++;
+        return true;
+      } else if (response.toLowerCase() === "no" || response.toLowerCase() === "n") {
+        i++;
+        return false;
+      } else {
+        alert("Your input was invalid.");
+      }
     } else {
-      alert("Your input was invalid.");
+      break;
     }
   }
 }
